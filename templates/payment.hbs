@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Dashboard</title>
+</head>
+<body>
+  <h1>Payment Dashboard</h1>
+
+  {{#if roomsData.length}}
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Room ID</th>
+        <th>Stay Duration (days)</th>
+        <th>Room Cost</th>
+        <th>Food Order Cost</th>
+        <th>Cleaning Cost</th>
+        <th>Total Cost</th>
+        <th>Pay</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each roomsData}}
+        <tr>
+          <td>{{this.roomId}}</td>
+          <td>{{this.stayDuration}}</td>
+          <td>${{this.roomCost}}</td>
+          <td>${{this.foodOrderCost}}</td>
+          <td>${{this.cleaningCost}}</td>
+          <td>${{this.totalCost}}</td>
+          <td>
+            <form action="/payment/pay" method="POST">
+              <input type="hidden" name="roomId" value="{{this.roomId}}">
+              <button type="submit">Pay</button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+    <p>No reserved rooms found.</p>
+  {{/if}}
+
+  <a href="/">Back to Dashboard</a>
+</body>
+</html>

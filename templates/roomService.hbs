@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Service Dashboard</title>
+</head>
+<body>
+<h2>Room Service Dashboard</h2>
+
+<!-- Table to Display Room Services -->
+<table border="1">
+  <thead>
+    <tr>
+      <th>Room Number</th>
+      <th>Food Orders</th>
+      <th>Cleaning Status</th>
+      <th>Maintenance Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each roomservices}}
+    <tr>
+      <td>{{this.roomId}}</td>
+      <td>
+        {{#if this.foodOrders.length}}
+          <ul>
+            {{#each this.foodOrders}}
+              <li>
+                {{this.item}} - {{this.status}}
+                <form action="/room-service/remove-food-order" method="POST" style="display:inline;">
+                  <input type="hidden" name="roomId" value="{{../roomId}}">
+                  <input type="hidden" name="item" value="{{this.item}}">
+                  <button type="submit">Remove</button>
+                </form>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          No food orders
+        {{/if}}
+      </td>
+      <td>
+        {{this.cleaningStatus}} 
+        {{#if (eq this.cleaningStatus 'pending')}}
+          <form action="/room-service/remove-cleaning" method="POST" style="display:inline;">
+            <input type="hidden" name="roomId" value="{{this.roomId}}">
+            <button type="submit">Remove Cleaning Request</button>
+          </form>
+        {{/if}}
+      </td>
+      <td>
+        {{this.maintenanceStatus}} 
+        {{#if (eq this.maintenanceStatus 'in_progress')}}
+          <form action="/room-service/remove-maintenance" method="POST" style="display:inline;">
+            <input type="hidden" name="roomId" value="{{this.roomId}}">
+            <button type="submit">Remove Maintenance Request</button>
+          </form>
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<hr>
+
+<!-- Section for Food Orders, Cleaning, and Maintenance Actions -->
+
+<h3>Request Food Order</h3>
+<form action="/room-service/food-order" method="POST">
+  <label for="roomId-food">Select Room:</label>
+  <select id="roomId-food" name="roomId" required>
+    {{#each roomIds}}
+      <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+  <input type="text" name="foodItems" placeholder="Enter food items separated by commas" required>
+  <button type="submit">Order Food</button>
+</form>
+
+<hr>
+
+<h3>Request Cleaning</h3>
+<form action="/room-service/request-cleaning" method="POST">
+  <label for="roomId-cleaning">Select Room:</label>
+  <select id="roomId-cleaning" name="roomId" required>
+    {{#each roomIds}}
+      <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
+    {{/each}}
+  </select>
+  <button type="submit">Request Cleaning</button>
+</form>
+
+<hr>
+
+<h3>Set Maintenance</h3>
+<form action="/room-service/set-maintenance" method="POST">
+  <label for="roomId-maintenance">Select Room:</label>
+  <select id="roomId-maintenance" name="roomId" required>
+    {{#each roomIds}}
+      <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
+    {{/each}}
+  </select>
+  <button type="submit">Set Maintenance</button>
+</form>
+
+<a href="/">Back to Dashboard</a>
+
+</body>
+</html>

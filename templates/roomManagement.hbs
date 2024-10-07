@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management</title>
+</head>
+<body>
+    <h1>Room Management</h1>
+
+    <!-- Initialize Floors and Rooms (Only if not initialized yet) -->
+{{#unless isInitialized}}
+<h2>Initialize Floors and Rooms</h2>
+<form action="/room-management/initialize" method="POST">
+    <label for="floors">Number of Floors:</label>
+    <input type="number" id="floors" name="floors" required {{#if isInitialized}}disabled{{/if}}>
+
+    <label for="roomsPerFloor">Rooms per Floor:</label>
+    <input type="number" id="roomsPerFloor" name="roomsPerFloor" required {{#if isInitialized}}disabled{{/if}}>
+
+    <button type="submit" {{#if isInitialized}}disabled{{/if}}>Initialize</button>
+</form>
+{{else}}
+<!--<p>The hotel has already been initialized.</p>-->
+{{/unless}}
+
+    <!-- Change Number of Rooms on a Floor -->
+    <h2>Change Number of Rooms on a Floor</h2>
+    <form action="/room-management/change-rooms" method="POST">
+        <label for="floor">Floor Number:</label>
+        <input type="number" id="floor" name="floor" required>
+
+        <label for="roomsPerFloor">New Number of Rooms:</label>
+        <input type="number" id="roomsPerFloor" name="roomsPerFloor" required>
+
+        <button type="submit">Change Rooms</button>
+    </form>
+
+    <!-- Room Availability (only available rooms) -->
+<h2>Room Availability</h2>
+<form action="/room-management/availability" method="GET">
+<button type="submit">Refresh</button>
+</form>
+{{#if rooms.length}}
+<table border="1">
+    <tr>
+        <th>Floor</th>
+        <th>Room Number</th>
+        <th>Status</th>
+        <th>Reserved By</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+    </tr>
+    {{#each rooms}}
+    <tr>
+        <td>{{this.floor}}</td>
+        <td>{{this.roomNumber}}</td>
+        <td>{{#if this.isAvailable}}Available{{else}}Reserved{{/if}}</td>
+        <td>{{this.reservedBy}}</td>
+        <td>{{this.checkInDate}}</td>
+        <td>{{this.checkOutDate}}</td>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<p>No rooms available at the moment.</p>
+{{/if}}
+
+
+    <h2>Reserve a Room</h2>
+<form action="/room-management/reserve" method="POST">
+    <label for="roomId">Select Room:</label>
+    <select id="roomId" name="roomId" required>
+        {{#each rooms}}
+        {{#if this.isAvailable}}
+        <option value="{{this._id}}">Floor {{this.floor}} - Room {{this.roomNumber}}</option>
+        {{/if}}
+        {{/each}}
+    </select>
+
+    <label for="reservedBy">Reserved By:</label>
+    <input type="text" id="reservedBy" name="reservedBy" required>
+
+    <label for="checkInDate">Check-in Date:</label>
+    <input type="date" id="checkInDate" name="checkInDate" required>
+
+    <label for="checkOutDate">Check-out Date:</label>
+    <input type="date" id="checkOutDate" name="checkOutDate" required>
+
+    <button type="submit">Reserve Room</button>
+</form>
+
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>

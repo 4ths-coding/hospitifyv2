@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Management</title>
+</head>
+<body>
+    <h1>Parking Spaces</h1>
+
+    <h2>Set Number of Parking Spaces</h2>
+    <form action="/parking/set-spaces" method="POST">
+        <input type="number" name="numSpaces" min="1" required />
+        <button type="submit">Set Spaces</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Parking Space</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each parkingSpaces}}
+        <tr>
+          <td>Space {{this.id}}</td>
+          <td>{{#if this.isTaken}} Taken {{else}} Available {{/if}}</td>
+          <td>
+            {{#if this.isTaken}}
+            <form action="/parking/clear/{{this.id}}" method="POST">
+              <button type="submit">Pay</button>
+            </form>
+            {{else}}
+            <form action="/parking/park/{{this.id}}" method="POST">
+              <button type="submit">Park</button>
+            </form>
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>
