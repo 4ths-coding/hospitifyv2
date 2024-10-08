@@ -10,46 +10,83 @@
         
         body {
             margin: 0 auto;
+        }
+
+        h1 {
+            margin: 0 auto;
+            text-align: center;
+            background-color: rgb(243, 220, 158);
+            padding: 20px;
+        }
+
+        #logo {
+            height: 200px;
+        }
+
+        .main-container {
+            margin-top: 100px;
+        }
+
+        nav li {
+            display: flex;
+            background-color: rgb(243, 220, 158);
+            text-decoration: none;
+            list-style-type: none;
+            text-decoration: none;
+            justify-content: center;
+            margin: 10px 20px 25px 20px;
+            padding: 25px 10px 25px 10px;
+            cursor: pointer;
+          
+        }
+        li {
+            width: 400px;
+            height: 60px;
+            text-align: center;
+            font-size: 25px;
+            line-height: 60px;
+        }
+
+        li:hover {
+            border: solid black 1px;
+
+        }
+
+        ul {
             display: flex;
             justify-content: center;
         }
 
-        nav {
-            display: flex;
-            background-color: green;
-        }
-
         a {
             text-decoration: none;
+            color: black;
         }
 
-        li {
-            background-color: red;
-            text-decoration: none;
-            margin: 10px;
-        }
-
-        ul {
-            text-decoration: none;
-        }
 
     </style>
 
 </head>
 
 <body>
-    <h1>Welcome to the Hotel Management System</h1>
+    <h1>Welcome to the Hotel Management System</h1><br>
 
-    <img src="/img/hospitifyLogo.png" alt="">
+    <img id="logo" src="/img/hospitifyLogo.png" alt="">
 
-    <nav>
-        <ul>
-            <li><a href="/room-service">Room Service</a></li>
-            <li><a href="/room-management">Room Management</a></li>
-            <li><a href="/payment">Payment</a></li>
-            <li><a href="/parking">Parking</a></li>
-        </ul>
-    </nav>
+    <div class="main-container">
+
+        <nav>
+            <ul>
+                <li><a href="/room-service">Room Service</a></li>
+                <li><a href="/room-management">Room Management</a></li>
+            </ul>
+            <ul>
+                <li><a href="/payment">Payment</a></li>
+                <li><a href="/parking">Parking</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
 
 
 </body>
