@@ -3,5 +3,8 @@
     "express": "^4.21.0",
     "hbs": "^4.2.0",
     "mongoose": "^8.7.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
   }
 }
