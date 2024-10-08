@@ -25,6 +25,8 @@ app.set('views', path.join(__dirname, '../templates'));
 // Middleware to parse JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 
 // Routes
 app.get('/', (req, res) => {
