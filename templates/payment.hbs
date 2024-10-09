@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Dashboard</title>
     {{!-- <link href="/css/output.css" rel="stylesheet"> --}}
-     <link href="/css/rpayment.css" rel="stylesheet">
+     <link href="/css/payment.css" rel="stylesheet">
     
-
 </head>
 <body>
-  <h1>Payment Dashboard</h1>
-
+  <div class="header">
+        <img src="../img/hospitifyLogo.png" alt="Hospitify Logo">
+        <h1>Payment Dashboard</h1>
+  </div>
+  <center>
   {{#if roomsData.length}}
   <table border="1">
     <thead>
@@ -37,7 +39,7 @@
           <td>
             <form action="/payment/pay" method="POST">
               <input type="hidden" name="roomId" value="{{this.roomId}}">
-              <button type="submit">Pay</button>
+              <button type="submit" class="payButton">Pay</button>
             </form>
           </td>
         </tr>
@@ -47,7 +49,9 @@
   {{else}}
     <p>No reserved rooms found.</p>
   {{/if}}
+   
 
-  <a href="/">Back to Dashboard</a>
+  <a href="/" class="rounded-button">Back to Dashboard</a>
+  </center>
 </body>
 </html>

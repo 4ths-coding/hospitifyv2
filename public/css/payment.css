@@ -2,31 +2,80 @@ body{
     background-color:#e5d9d9;
     font-family: 'Montserrat', sans-serif;
     font-optical-sizing: auto;
-   
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: #fdebeb; /* Header background color */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    padding: 20px; /* Padding around the header */
+    border-bottom: 10px solid #815E2A; /* Thin brown line below the header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add shadow to the header */
+}
+
+.header img {
+    height: 200px;
+    width: 300px;
+    margin-bottom: 5px; /* Space below the logo */
+}
+
+.header h1 {
+    font-size: 3rem; /* Font size for the heading */
+    text-align: center; /* Center text */
 }
 
 
-h1 {
+table{
+    width: 80%;
+    margin: 20px auto;
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1a73e8; 
-    padding-top: 20px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-color: transparent;
+    background-color: white;
 }
 
-.container {
-    background-color: #ffffff;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
+th, td {
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 12px; /* Padding in cells */
+    text-align: left; /* Align text to the left */
 }
 
-.logo-section {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px
+th {
+    background-color: #f0f0f0; /* Light gray background for headers */
+}
+
+.rounded-button {
+    position: fixed;
+    bottom: 20px;
+    left: 43.5%;
+    display: inline-block; /* Allows padding to work */
+    padding: 10px 20px; /* Vertical and horizontal padding */
+    background-color: royalblue;
+    color: white; /* White text */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 25px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.rounded-button:hover {
+    background-color: steelblue; 
+}
+
+.payButton {
+    padding: 10px 20px; /* Button padding */
+    background-color: royalblue; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.payButton:hover {
+    background-color: steelblue; 
 }
