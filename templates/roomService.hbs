@@ -4,129 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Service Dashboard</title>
-    {{!-- <link href="/css/output.css" rel="stylesheet"> --}}
-    <link href="/css/roomservice.css" rel="stylesheet">
-    {{!-- google font montseratt --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="/css/output.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5d9d9; /* Light gray background */
+            font-family: Arial, sans-serif; /* Font for the page */
+        }
 
+        .header {
+            background-color: #fdebeb; /* Light pink background */
+            display: flex;
+            flex-direction: column; /* Stack logo and title vertically */
+            align-items: center; /* Center horizontally */
+            padding: 20px; /* Padding around the header */
+            border-bottom: 10px solid #815E2A; /* Thin brown line below the header */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add shadow to the header */
+        }
+
+        .header h2 {
+            margin-top: 10px; /* Space between logo and heading */
+            font-size: 2rem; /* Larger font for the heading */
+            text-align: center; /* Center text */
+        }
+
+        img {
+            height: 80px; /* Adjust the logo height */
+            width: 80px; /* Adjust the logo width */
+        }
+
+        table {
+            width: 100%; /* Full width */
+            border-collapse: collapse; /* Remove space between borders */
+            margin: 20px 0; /* Space above and below the table */
+            background-color: white; /* White background for the table */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        th, td {
+            border: 1px solid #ccc; /* Light gray border */
+            padding: 12px; /* Padding in cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #f0f0f0; /* Light gray background for headers */
+        }
+
+        h3 {
+            margin: 20px 0 10px; /* Space around section headers */
+            font-size: 1.5rem; /* Font size for section headers */
+            text-align: center; /* Center section headers */
+        }
+
+        .form-wrapper {
+            max-width: 600px; /* Limit the width of forms */
+            margin: 0 auto; /* Center the forms */
+            padding: 0 20px; /* Add horizontal padding */
+        }
+
+        .flex-container {
+            display: flex; /* Enable flexbox */
+            justify-content: space-between; /* Space between the forms */
+            margin-bottom: 20px; /* Space below the container */
+        }
+
+        form {
+            background-color: #ffffff; /* White background for forms */
+            padding: 20px; /* Padding inside forms */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for forms */
+            flex: 1; /* Allow forms to grow equally */
+            margin-right: 10px; /* Space between forms */
+        }
+
+        /* Remove margin for the last form */
+        form:last-child {
+            margin-right: 0; /* No right margin for the last form */
+        }
+
+        select, input[type="text"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Padding inside inputs */
+            margin: 10px 0; /* Space around inputs */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        button {
+            background-color: #e5d9d9; /* Button background color */
+            color: black; /* Button text color */
+            padding: 10px 20px; /* Padding for buttons */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 10px; /* Space above the button */
+            display: block; /* Make button block level for centering */
+            margin-left: auto; /* Center the button */
+            margin-right: auto; /* Center the button */
+        }
+
+        button:hover {
+            background-color: #fdebeb; /* Button color on hover */
+        }
+
+        
+       .back-button {
+            background-color: #3182ce; /* Blue background */
+            color: white; /* White text */
+            padding: 10px 15px; /* Padding for the button */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Change to inline-block for smaller size */
+            margin: 20px auto; /* Center the button and add vertical margin */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+        
+
+        .back-button:hover {
+            background-color: #2b6cb0; /* Darker blue on hover */
+        }
+
+        a {
+            display: block; /* Block display for link */
+            text-align: center; /* Center the link text */
+            margin-top: 20px; /* Space above link */
+            color: #3182ce; /* Blue color */
+            text-decoration: none; /* No underline */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
 </head>
-
-
 <body>
 
-  
- <img src="https://raw.githubusercontent.com/Nikzaru/hospitifyv2/img/hospitifyLogo.png" alt="Hospitify"  height="100px" width="100px">
- 
+    <div class="header">
+        <img src="../img/hospitifyLogo.png" alt="Hospitify Logo">
+        <h2>Room Service Dashboard</h2>
+    </div>
 
-<div class="header"><h2>Room Service Dashboard</h2></div>
-
-<!-- Table to Display Room Services -->
-<table class="tbl-order" border="1">
-  <thead>
-    <tr>
-      <th>Room Number</th>
-      <th>Food Orders</th>
-      <th>Cleaning Status</th>
-      <th>Maintenance Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each roomservices}}
-    <tr>
-      <td>{{this.roomId}}</td>
-      <td>
-        {{#if this.foodOrders.length}}
-          <ul>
-            {{#each this.foodOrders}}
-              <li>
-                {{this.item}} - {{this.status}}
-                <form action="/room-service/remove-food-order" method="POST" style="display:inline;">
-                  <input type="hidden" name="roomId" value="{{../roomId}}">
-                  <input type="hidden" name="item" value="{{this.item}}">
-                  <br>
-                  <button class="table-btn" type="submit">Remove</button>
-                </form>
-              </li>
+    <!-- Table to Display Room Services -->
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Food Orders</th>
+                <th>Cleaning Status</th>
+                <th>Maintenance Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each roomservices}}
+            <tr>
+                <td>{{this.roomId}}</td>
+                <td>
+                    {{#if this.foodOrders.length}}
+                    <ul>
+                        {{#each this.foodOrders}}
+                        <li>
+                            {{this.item}} - {{this.status}}
+                            <form action="/room-service/remove-food-order" method="POST" style="display:inline;">
+                                <input type="hidden" name="roomId" value="{{../roomId}}">
+                                <input type="hidden" name="item" value="{{this.item}}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{else}}
+                    No food orders
+                    {{/if}}
+                </td>
+                <td>
+                    {{this.cleaningStatus}} 
+                    {{#if (eq this.cleaningStatus 'pending')}}
+                    <form action="/room-service/remove-cleaning" method="POST" style="display:inline;">
+                        <input type="hidden" name="roomId" value="{{this.roomId}}">
+                        <button type="submit">Remove Cleaning Request</button>
+                    </form>
+                    {{/if}}
+                </td>
+                <td>
+                    {{this.maintenanceStatus}} 
+                    {{#if (eq this.maintenanceStatus 'in_progress')}}
+                    <form action="/room-service/remove-maintenance" method="POST" style="display:inline;">
+                        <input type="hidden" name="roomId" value="{{this.roomId}}">
+                        <button type="submit">Remove Maintenance Request</button>
+                    </form>
+                    {{/if}}
+                </td>
+            </tr>
             {{/each}}
-          </ul>
-        {{else}}
-          No food orders
-        {{/if}}
-      </td>
-      <td>
-        {{this.cleaningStatus}} 
-        {{#if (eq this.cleaningStatus 'pending')}}
-          <form action="/room-service/remove-cleaning" method="POST" style="display:inline;">
-            <input type="hidden" name="roomId" value="{{this.roomId}}">
-             <br>
-            <button class="table-btn" type="submit">Remove </button>
-          </form>
-        {{/if}}
-      </td>
-      <td>
-        {{this.maintenanceStatus}} 
-        {{#if (eq this.maintenanceStatus 'in_progress')}}
-          <form action="/room-service/remove-maintenance" method="POST" style="display:inline;">
-            <input type="hidden" name="roomId" value="{{this.roomId}}">
-             <br>
-            <button class="table-btn" type="submit">Remove </button>
-          </form>
-        {{/if}}
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+        </tbody>
+    </table>
 
-<hr>
+    <hr>
 
-<!-- Section for Food Orders, Cleaning, and Maintenance Actions -->
+    <!-- Section for Food Orders and Cleaning Actions side by side -->
+    <div class="form-wrapper">
+        <h3>Request Services</h3>
+        <div class="flex-container">
+            <form action="/room-service/food-order" method="POST">
+                <label for="roomId-food">Select Room:</label>
+                <select id="roomId-food" name="roomId" required>
+                    {{#each roomIds}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+                <input type="text" name="foodItems" placeholder="Enter food items separated by commas" required>
+                <button type="submit">Order Food</button>
+            </form>
 
-<h3>Request Food Order</h3>
-<form action="/room-service/food-order" method="POST">
-  <label for="roomId-food">Select Room:</label>
-  <select id="roomId-food" name="roomId" required>
-    {{#each roomIds}}
-      <option value="{{this}}">{{this}}</option>
-    {{/each}}
-  </select>
-  <input type="text" name="foodItems" placeholder="Enter food items separated by commas" required>
-  <br>
-  <button class="submit-btn" type="submit">Order Food</button>
-</form>
+            <form action="/room-service/request-cleaning" method="POST">
+                <label for="roomId-cleaning">Select Room:</label>
+                <select id="roomId-cleaning" name="roomId" required>
+                    {{#each roomIds}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+                <button type="submit">Request Cleaning</button>
+            </form>
+        </div>
 
-<hr>
+        <hr>
 
-<h3>Request Cleaning</h3>
-<form action="/room-service/request-cleaning" method="POST">
-  <label for="roomId-cleaning">Select Room:</label>
-  <select id="roomId-cleaning" name="roomId" required>
-    {{#each roomIds}}
-      <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
-    {{/each}}
-  </select>
-  <br>
-  <button class="submit-btn" type="submit">Request Cleaning</button>
-</form>
+        <h3>Set Maintenance</h3>
+        <form action="/room-service/set-maintenance" method="POST">
+            <label for="roomId-maintenance">Select Room:</label>
+            <select id="roomId-maintenance" name="roomId" required>
+                {{#each roomIds}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <button type="submit">Set Maintenance</button>
+        </form>
+    </div>
 
-<hr>
-
-<h3>Set Maintenance</h3>
-<form action="/room-service/set-maintenance" method="POST">
-  <label for="roomId-maintenance">Select Room:</label>
-  <select id="roomId-maintenance" name="roomId" required>
-    {{#each roomIds}}
-      <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
-    {{/each}}
-  </select>
-  <br>
-  <button class="submit-btn" type="submit">Set Maintenance</button>
-</form>
-<br>
-
-<div ><a class="btn-back" href="/">Back to Dashboard</a></div>
+    <a href="/" class="back-button">Back to Dashboard</a>
 
 </body>
 </html>
