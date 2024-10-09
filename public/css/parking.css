@@ -4,11 +4,48 @@ body{
     font-optical-sizing: auto;
     justify-content: center;
     align-items: center;
-    margin: 30px;
+}
+
+#logo {
+    height: 300px;
+    width: 400px;
+}
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.header {
+    border-bottom: 10px solid #815E2A;;
+}
+
+.main-container {
+    margin: 10px 70px 100px 70px;
 }
 
 span#set-number-txt {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 15px;
+}
+
+.btn-back { 
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 20px; 
+    background-color:  #3182ce; 
+    text-decoration: none; 
+    border-radius: 10px; 
+    transition: background-color 0.3s;
+    color: white; 
+    border-radius: 4px;
+    margin: 20px 45% 0px 45%;
+}
+
+.btn-back:hover {
+    background-color: #2b6cb0;
+    text-decoration: none;
 }

@@ -648,6 +648,6 @@ a {
 }
 
 a:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: none; 
 }
 

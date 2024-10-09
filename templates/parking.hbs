@@ -9,46 +9,61 @@
 
 </head>
 <body>
-    <h1>Parking Spaces</h1>
+
+   {{!-- LOGO SECTION --}}
+    <div class="logo-container">
+        <img id="logo" src="/img/hospitifyLogo.png" alt="">
+    </div>
+
+  <div class="header">
+        <h1>Parking Spaces</h1>
+    </div>
 
     <span id="set-number-txt">
       <h2>Set Number of Parking Spaces</h2>
     </span>
-    
-    <form action="/parking/set-spaces" method="POST">
-        <input type="number" name="numSpaces" min="1" required />
-        <button type="submit">Set Spaces</button>
-    </form>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Parking Space</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each parkingSpaces}}
-        <tr>
-          <td>Space {{this.id}}</td>
-          <td>{{#if this.isTaken}} Taken {{else}} Available {{/if}}</td>
-          <td>
-            {{#if this.isTaken}}
-            <form action="/parking/clear/{{this.id}}" method="POST">
-              <button type="submit">Pay</button>
-            </form>
-            {{else}}
-            <form action="/parking/park/{{this.id}}" method="POST">
-              <button type="submit">Park</button>
-            </form>
-            {{/if}}
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <div class="main-container">
+        <form action="/parking/set-spaces" method="POST">
+          <input type="number" name="numSpaces" min="1" required />
+          <button type="submit">Set Spaces</button>
+      </form>
 
-    <a href="/">Back to Dashboard</a>
+      <table>
+        <thead>
+          <tr>
+            <th>Parking Space</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each parkingSpaces}}
+          <tr>
+            <td>Space {{this.id}}</td>
+            <td>{{#if this.isTaken}} Taken {{else}} Available {{/if}}</td>
+            <td>
+              {{#if this.isTaken}}
+              <form action="/parking/clear/{{this.id}}" method="POST">
+                <button type="submit">Pay</button>
+              </form>
+              {{else}}
+              <form action="/parking/park/{{this.id}}" method="POST">
+                <button type="submit">Park</button>
+              </form>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class="back-link">
+            <a href="/" class="btn-back">Back to Dashboard</a>
+      </div>
+
+    </div>
+
+
 </body>
 </html>
