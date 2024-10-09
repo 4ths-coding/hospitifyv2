@@ -51,11 +51,12 @@ li {
     text-align: center;
     font-size: 25px;
     line-height: 60px;
+    text-decoration: none;
 }
 
 li:hover {
     box-shadow: 1px 5px 15px darkgray;
-
+    text-decoration: none;
 }
 
 ul {
@@ -66,4 +67,7 @@ ul {
 a {
     text-decoration: none;
     color: black;
+}
+a:hover {
+    text-decoration: none;
 }
