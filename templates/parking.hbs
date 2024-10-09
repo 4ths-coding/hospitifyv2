@@ -11,7 +11,10 @@
 <body>
     <h1>Parking Spaces</h1>
 
-    <h2>Set Number of Parking Spaces</h2>
+    <span id="set-number-txt">
+      <h2>Set Number of Parking Spaces</h2>
+    </span>
+    
     <form action="/parking/set-spaces" method="POST">
         <input type="number" name="numSpaces" min="1" required />
         <button type="submit">Set Spaces</button>

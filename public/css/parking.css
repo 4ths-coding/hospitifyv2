@@ -7,4 +7,8 @@ body{
     margin: 30px;
 }
 
-
+span#set-number-txt {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
