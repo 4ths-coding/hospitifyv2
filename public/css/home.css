@@ -1,6 +1,9 @@
 body {
-    margin: 0 auto;
-    background-color: #e5d9d9;
+    background-color:#e5d9d9;
+    font-family: 'Montserrat', sans-serif;
+    font-optical-sizing: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
