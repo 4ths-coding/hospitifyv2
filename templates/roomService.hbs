@@ -4,30 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Service Dashboard</title>
-    <link href="/css/output.css" rel="">
-    
-<style>
-  body{
-   margin: 0;
-   padding: 0;
-    background-color: white
-  }
+    {{!-- <link href="/css/output.css" rel="stylesheet"> --}}
+    <link href="/css/roomservice.css" rel="stylesheet">
+    {{!-- google font montseratt --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  .header{
-    background-color: pink;
-    height: 100px;
-  }
-</style>
 </head>
 
 
 <body>
 
-  <img src="../img/hospitifyLogo.png" alt="" height="100px" width="100px">
+  
+ <img src="/img/hospitifyLogo.png" alt="Hospitify" height="100px" width="100px">
+
 <div class="header"><h2>Room Service Dashboard</h2></div>
 
 <!-- Table to Display Room Services -->
-<table border="1">
+<table class="tbl-order" border="1">
   <thead>
     <tr>
       <th>Room Number</th>
@@ -49,7 +44,8 @@
                 <form action="/room-service/remove-food-order" method="POST" style="display:inline;">
                   <input type="hidden" name="roomId" value="{{../roomId}}">
                   <input type="hidden" name="item" value="{{this.item}}">
-                  <button type="submit">Remove</button>
+                  <br>
+                  <button class="table-btn" type="submit">Remove</button>
                 </form>
               </li>
             {{/each}}
@@ -63,7 +59,8 @@
         {{#if (eq this.cleaningStatus 'pending')}}
           <form action="/room-service/remove-cleaning" method="POST" style="display:inline;">
             <input type="hidden" name="roomId" value="{{this.roomId}}">
-            <button type="submit">Remove Cleaning Request</button>
+             <br>
+            <button class="table-btn" type="submit">Remove </button>
           </form>
         {{/if}}
       </td>
@@ -72,7 +69,8 @@
         {{#if (eq this.maintenanceStatus 'in_progress')}}
           <form action="/room-service/remove-maintenance" method="POST" style="display:inline;">
             <input type="hidden" name="roomId" value="{{this.roomId}}">
-            <button type="submit">Remove Maintenance Request</button>
+             <br>
+            <button class="table-btn" type="submit">Remove </button>
           </form>
         {{/if}}
       </td>
@@ -94,7 +92,8 @@
     {{/each}}
   </select>
   <input type="text" name="foodItems" placeholder="Enter food items separated by commas" required>
-  <button type="submit">Order Food</button>
+  <br>
+  <button class="submit-btn" type="submit">Order Food</button>
 </form>
 
 <hr>
@@ -107,7 +106,8 @@
       <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
     {{/each}}
   </select>
-  <button type="submit">Request Cleaning</button>
+  <br>
+  <button class="submit-btn" type="submit">Request Cleaning</button>
 </form>
 
 <hr>
@@ -120,10 +120,12 @@
       <option value="{{this}}">{{this}}</option> <!-- Use roomIds array for selection -->
     {{/each}}
   </select>
-  <button type="submit">Set Maintenance</button>
+  <br>
+  <button class="submit-btn" type="submit">Set Maintenance</button>
 </form>
+<br>
 
-<a href="/">Back to Dashboard</a>
+<div ><a class="btn-back" href="/">Back to Dashboard</a></div>
 
 </body>
 </html>
