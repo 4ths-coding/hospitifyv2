@@ -36,7 +36,7 @@
         }
 
         table {
-            width: 100%; /* Full width */
+            width: 95%; /* Full width */
             border-collapse: collapse; /* Remove space between borders */
             margin: 20px 0; /* Space above and below the table */
             background-color: white; /* White background for the table */
@@ -72,7 +72,7 @@
         }
 
         form {
-            background-color: #ffffff; /* White background for forms */
+            background-color: white; /* White background for forms */
             padding: 20px; /* Padding inside forms */
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for forms */
@@ -150,6 +150,7 @@
     </div>
 
     <!-- Table to Display Room Services -->
+    <center>
     <table>
         <thead>
             <tr>
@@ -169,7 +170,7 @@
                         {{#each this.foodOrders}}
                         <li>
                             {{this.item}} - {{this.status}}
-                            <form action="/room-service/remove-food-order" method="POST" style="display:inline;">
+                            <form  action="/room-service/remove-food-order" method="POST" style="display:inline; background-color: transparent; box-shadow:none;">
                                 <input type="hidden" name="roomId" value="{{../roomId}}">
                                 <input type="hidden" name="item" value="{{this.item}}">
                                 <button type="submit">Remove</button>
@@ -184,7 +185,7 @@
                 <td>
                     {{this.cleaningStatus}} 
                     {{#if (eq this.cleaningStatus 'pending')}}
-                    <form action="/room-service/remove-cleaning" method="POST" style="display:inline;">
+                    <form action="/room-service/remove-cleaning" method="POST" style="display:inline; background-color: transparent; box-shadow:none;">
                         <input type="hidden" name="roomId" value="{{this.roomId}}">
                         <button type="submit">Remove Cleaning Request</button>
                     </form>
@@ -193,7 +194,7 @@
                 <td>
                     {{this.maintenanceStatus}} 
                     {{#if (eq this.maintenanceStatus 'in_progress')}}
-                    <form action="/room-service/remove-maintenance" method="POST" style="display:inline;">
+                    <form action="/room-service/remove-maintenance" method="POST" style="display:inline; background-color: transparent; box-shadow:none;">
                         <input type="hidden" name="roomId" value="{{this.roomId}}">
                         <button type="submit">Remove Maintenance Request</button>
                     </form>
@@ -203,7 +204,7 @@
             {{/each}}
         </tbody>
     </table>
-
+    </center>
     <hr>
 
     <!-- Section for Food Orders and Cleaning Actions side by side -->
@@ -245,8 +246,9 @@
             <button type="submit">Set Maintenance</button>
         </form>
     </div>
-
+    <center>
     <a href="/" class="back-button">Back to Dashboard</a>
+    </center>
 
 </body>
 </html>
