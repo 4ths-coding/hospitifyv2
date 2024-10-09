@@ -4,96 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Management</title>
-    {{!-- <link href="/css/output.css" rel="stylesheet"> --}}
+    <link href="/css/output.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e5d9d9; /* Set the background color */
+        }
 
+        .header {
+            background-color: #fdebeb; /* Header background color */
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center horizontally */
+            padding: 20px; /* Padding around the header */
+            border-bottom: 10px solid #815E2A; /* Thin brown line below the header */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add shadow to the header */
+        }
+
+        .header img {
+            height: 80px; /* Adjust the logo height */
+            width: 80px; /* Adjust the logo width */
+            margin-bottom: 10px; /* Space below the logo */
+        }
+
+        .header h1 {
+            font-size: 3rem; /* Font size for the heading */
+            text-align: center; /* Center text */
+        }
+
+        button {
+            background-color: #fdebeb; /* Button background color */
+            color: #000; /* Button text color */
+            padding: 10px 15px; /* Padding for buttons */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 10px; /* Space above the button */
+        }
+
+        button:hover {
+            background-color: #e5d9d9; /* Background color on hover */
+        }
+
+        .button-container {
+            display: flex; /* Use flexbox to center the buttons */
+            justify-content: center; /* Center the buttons horizontally */
+            margin: 20px 0; /* Space above and below */
+        }
+
+        .no-rooms {
+            display: flex; /* Use flexbox to center the message */
+            justify-content: center; /* Center the message horizontally */
+            align-items: center; /* Center the message vertically */
+            height: 100%; /* Make it take full height of the container */
+            text-align: center; /* Center text */
+        }
+
+        .back-button {
+            background-color: #3182ce; /* Blue background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding for the button */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Inline-block for button styling */
+            margin-top: 20px; /* Space above the button */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+        .back-button:hover {
+        background-color: #2b6cb0; /* Darker blue on hover */
+}
+
+        .back-link {
+            display: flex; /* Use flexbox to center the link */
+            justify-content: center; /* Center the link horizontally */
+            margin-top: 20px; /* Space above the link */
+            font-size: 1.2rem; /* Adjust font size if needed */
+        }
+    </style>
 </head>
-<body>
-    <h1>Room Management</h1>
+<body class="text-gray-800">
+    <div class="header">
+        <img src="../img/hospitifyLogo.png" alt="Hospitify Logo">
+        <h1>Room Management</h1>
+    </div>
 
-    <!-- Initialize Floors and Rooms (Only if not initialized yet) -->
-{{#unless isInitialized}}
-<h2>Initialize Floors and Rooms</h2>
-<form action="/room-management/initialize" method="POST">
-    <label for="floors">Number of Floors:</label>
-    <input type="number" id="floors" name="floors" required {{#if isInitialized}}disabled{{/if}}>
+    <div class="container mx-auto p-4">
+        <!-- Initialize Floors and Rooms (Only if not initialized yet) -->
+        {{#unless isInitialized}}
+        <h2 class="text-2xl font-semibold mb-4">Initialize Floors and Rooms</h2>
+        <form action="/room-management/initialize" method="POST" class="mb-6 flex flex-col items-center">
+            <div class="flex flex-col w-full mr-4">
+                <label for="floors" class="block mb-2">Number of Floors:</label>
+                <input type="number" id="floors" name="floors" required class="border border-gray-300 p-2 rounded w-full mb-4">
 
-    <label for="roomsPerFloor">Rooms per Floor:</label>
-    <input type="number" id="roomsPerFloor" name="roomsPerFloor" required {{#if isInitialized}}disabled{{/if}}>
+                <label for="roomsPerFloor" class="block mb-2">Rooms per Floor:</label>
+                <input type="number" id="roomsPerFloor" name="roomsPerFloor" required class="border border-gray-300 p-2 rounded w-full mb-4">
+            </div>
+            <div class="button-container">
+                <button type="submit">Initialize</button>
+            </div>
+        </form>
+        {{else}}
+        <p class="text-red-500">The hotel has already been initialized.</p>
+        {{/unless}}
 
-    <button type="submit" {{#if isInitialized}}disabled{{/if}}>Initialize</button>
-</form>
-{{else}}
-<!--<p>The hotel has already been initialized.</p>-->
-{{/unless}}
+        <!-- Change Number of Rooms on a Floor -->
+        <h2 class="text-2xl font-semibold mb-4">Change Number of Rooms on a Floor</h2>
+        <form action="/room-management/change-rooms" method="POST" class="mb-6 flex flex-col items-center">
+            <div class="flex flex-col w-full mr-4">
+                <label for="floor" class="block mb-2">Floor Number:</label>
+                <input type="number" id="floor" name="floor" required class="border border-gray-300 p-2 rounded w-full mb-4">
 
-    <!-- Change Number of Rooms on a Floor -->
-    <h2>Change Number of Rooms on a Floor</h2>
-    <form action="/room-management/change-rooms" method="POST">
-        <label for="floor">Floor Number:</label>
-        <input type="number" id="floor" name="floor" required>
+                <label for="roomsPerFloor" class="block mb-2">New Number of Rooms:</label>
+                <input type="number" id="roomsPerFloor" name="roomsPerFloor" required class="border border-gray-300 p-2 rounded w-full mb-4">
+            </div>
+            <div class="button-container">
+                <button type="submit">Change Rooms</button>
+            </div>
+        </form>
 
-        <label for="roomsPerFloor">New Number of Rooms:</label>
-        <input type="number" id="roomsPerFloor" name="roomsPerFloor" required>
+        <!-- Room Availability -->
+        <h2 class="text-2xl font-semibold mb-4">Room Availability</h2>
+        <form action="/room-management/availability" method="GET" class="mb-6 flex flex-col items-center">
+            <div class="button-container">
+                <button type="submit">Refresh</button>
+            </div>
+        </form>
 
-        <button type="submit">Change Rooms</button>
-    </form>
-
-    <!-- Room Availability (only available rooms) -->
-<h2>Room Availability</h2>
-<form action="/room-management/availability" method="GET">
-<button type="submit">Refresh</button>
-</form>
-{{#if rooms.length}}
-<table border="1">
-    <tr>
-        <th>Floor</th>
-        <th>Room Number</th>
-        <th>Status</th>
-        <th>Reserved By</th>
-        <th>Check-In Date</th>
-        <th>Check-Out Date</th>
-    </tr>
-    {{#each rooms}}
-    <tr>
-        <td>{{this.floor}}</td>
-        <td>{{this.roomNumber}}</td>
-        <td>{{#if this.isAvailable}}Available{{else}}Reserved{{/if}}</td>
-        <td>{{this.reservedBy}}</td>
-        <td>{{this.checkInDate}}</td>
-        <td>{{this.checkOutDate}}</td>
-    </tr>
-    {{/each}}
-</table>
-{{else}}
-<p>No rooms available at the moment.</p>
-{{/if}}
-
-
-    <h2>Reserve a Room</h2>
-<form action="/room-management/reserve" method="POST">
-    <label for="roomId">Select Room:</label>
-    <select id="roomId" name="roomId" required>
-        {{#each rooms}}
-        {{#if this.isAvailable}}
-        <option value="{{this._id}}">Floor {{this.floor}} - Room {{this.roomNumber}}</option>
+        {{#if rooms.length}}
+        <table class="min-w-full border border-gray-300 mb-6">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 p-2">Floor</th>
+                    <th class="border border-gray-300 p-2">Room Number</th>
+                    <th class="border border-gray-300 p-2">Status</th>
+                    <th class="border border-gray-300 p-2">Reserved By</th>
+                    <th class="border border-gray-300 p-2">Check-In Date</th>
+                    <th class="border border-gray-300 p-2">Check-Out Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each rooms}}
+                <tr>
+                    <td class="border border-gray-300 p-2">{{this.floor}}</td>
+                    <td class="border border-gray-300 p-2">{{this.roomNumber}}</td>
+                    <td class="border border-gray-300 p-2">{{#if this.isAvailable}}Available{{else}}Reserved{{/if}}</td>
+                    <td class="border border-gray-300 p-2">{{this.reservedBy}}</td>
+                    <td class="border border-gray-300 p-2">{{this.checkInDate}}</td>
+                    <td class="border border-gray-300 p-2">{{this.checkOutDate}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <form class="no-rooms">
+            <p class="text-red-500">No rooms available at the moment.</p>
+        </form>
         {{/if}}
-        {{/each}}
-    </select>
 
-    <label for="reservedBy">Reserved By:</label>
-    <input type="text" id="reservedBy" name="reservedBy" required>
+        <!-- Reserve a Room -->
+        <h2 class="text-2xl font-semibold mb-4">Reserve a Room</h2>
+        <form action="/room-management/reserve" method="POST" class="mb-6 flex flex-col items-center">
+            <div class="flex flex-col w-full mr-4">
+                <label for="roomId" class="block mb-2">Select Room:</label>
+                <select id="roomId" name="roomId" required class="border border-gray-300 p-2 rounded w-full mb-4">
+                    {{#each rooms}}
+                    {{#if this.isAvailable}}
+                    <option value="{{this._id}}">Floor {{this.floor}} - Room {{this.roomNumber}}</option>
+                    {{/if}}
+                    {{/each}}
+                </select>
 
-    <label for="checkInDate">Check-in Date:</label>
-    <input type="date" id="checkInDate" name="checkInDate" required>
+                <label for="reservedBy" class="block mb-2">Reserved By:</label>
+                <input type="text" id="reservedBy" name="reservedBy" required class="border border-gray-300 p-2 rounded w-full mb-4">
 
-    <label for="checkOutDate">Check-out Date:</label>
-    <input type="date" id="checkOutDate" name="checkOutDate" required>
+                <label for="checkInDate" class="block mb-2">Check-in Date:</label>
+                <input type="date" id="checkInDate" name="checkInDate" required class="border border-gray-300 p-2 rounded w-full mb-4">
 
-    <button type="submit">Reserve Room</button>
-</form>
+                <label for="checkOutDate" class="block mb-2">Check-out Date:</label>
+                <input type="date" id="checkOutDate" name="checkOutDate" required class="border border-gray-300 p-2 rounded w-full mb-4">
+            </div>
+            <div class="button-container">
+                <button type="submit">Reserve Room</button>
+            </div>
+        </form>
 
-    
-       <a href="/">Back to Dashboard</a>
-    
+        <div class="back-link">
+            <a href="/" class="back-button">Back to Dashboard</a>
+        </div>
+    </div>
 </body>
 </html>
