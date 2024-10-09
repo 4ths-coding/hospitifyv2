@@ -3,6 +3,10 @@ body {
     background-color: #e5d9d9;
 }
 
+.header {
+    border-bottom: 10px solid #815E2A;;
+}
+
 h1 {
     margin: 0 auto;
     text-align: center;
@@ -10,14 +14,24 @@ h1 {
     padding: 20px;
 }
 
+/* LOGO */
 #logo {
-    height: 200px;
+    height: 300px;
+    width: 400px;
 }
 
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* MAIN CONTAINER */
 .main-container {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
+/* BUTTONS */
 nav li {
     display: flex;
     background-color: #fdebeb;
@@ -25,10 +39,11 @@ nav li {
     list-style-type: none;
     text-decoration: none;
     justify-content: center;
-    margin: 10px 20px 25px 20px;
+    margin: 0px 20px 25px 20px;
     padding: 25px 10px 25px 10px;
     cursor: pointer;
-  
+    border-radius: 10px;
+    transition: 0.1s;
 }
 li {
     width: 400px;
@@ -39,7 +54,7 @@ li {
 }
 
 li:hover {
-    border: solid black 1px;
+    box-shadow: 1px 5px 15px darkgray;
 
 }
 
