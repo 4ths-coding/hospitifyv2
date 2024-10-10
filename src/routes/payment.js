@@ -158,7 +158,7 @@ router.post('/pay', async (req, res) => {
       });
   
       // Render the payment page with updated room data after payment
-      res.render('payment', { roomsData });
+      res.render('payment');
   
     } catch (err) {
       console.error('Error processing payment:', err);
