@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     const reservedRooms = await Room.find({ checkInDate: { $exists: true }, isAvailable: false });
     
     if (reservedRooms.length === 0) {
-      return res.status(404).send('No reserved rooms found');
+      return res.render('payment', { roomsData: [] });
     }
 
     // Fetch room service records for all reserved rooms
