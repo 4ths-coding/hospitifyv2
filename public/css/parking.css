@@ -35,14 +35,14 @@ span#set-number-txt {
     display: flex; 
     flex-direction: row;
     justify-content: center;
-    padding: 10px 20px; 
+    padding: 10px 15px; 
     background-color:  #3182ce; 
     text-decoration: none; 
     border-radius: 10px; 
     transition: background-color 0.3s;
     color: white; 
     border-radius: 4px;
-    margin: 20px 45% 0px 45%;
+    margin: 20px 40%;
 }
 
 .btn-back:hover {
